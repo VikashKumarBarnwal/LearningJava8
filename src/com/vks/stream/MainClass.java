@@ -21,9 +21,9 @@ public class MainClass {
 	 */
 	public static void main(String[] args) {
 		
-		List<Employee> employeelist=  getEmployeeList();
+		List<Employee> employeelist=  Employee.getEmployeeList();
 		
-		printList(employeelist);
+		Employee.printList(employeelist);
 		
 		//Query 3.1 : How many male and female employees are there in the organization?
 		Map<String, Long> noOfMaleAndFemaleEmployees= employeelist.stream().collect(Collectors.groupingBy(Employee::getGender , Collectors.counting()));
@@ -41,7 +41,7 @@ public class MainClass {
 				
 		// find list of employee who has oud
 			List<Employee> employeeOddlist=employeelist.stream().filter(emp -> emp.getEmpId() % 2 != 0).collect(Collectors.toList());
-			printList(employeeOddlist);
+			Employee.printList(employeeOddlist);
 		// Q Find the sum of salary of odd emp id 
 			Integer sumSalary = employeelist.stream().filter(emp -> emp.getEmpId() % 2 != 0).collect( Collectors.summingInt(Employee:: getSalary ));
 			System.out.println("Sum of salary of Odd Employee = "+ sumSalary);
@@ -50,27 +50,11 @@ public class MainClass {
 			Map<Integer, String> empMap = employeelist.stream().collect(Collectors.toMap(Employee::getEmpId, Employee::getName));
 			
 			System.out.println("Employee Map " + empMap);
+			
+			// Short employee by name and then by age
+			List<Employee> employeeShortedlist= employeelist.stream().sorted((emp1 , emp2) -> (emp1.getName().compareTo(emp2.getName())) != 0 ? (emp1.getName().compareTo(emp2.getName())) : (emp1.getAge() - emp2.getAge())).collect(Collectors.toList());
+			Employee.printList(employeeShortedlist);
+	
 	}
 	
-	
-	public static List<Employee> getEmployeeList(){
-		List<Employee>  emplist = new ArrayList<>();
-		Employee e1 = new Employee( 1,  "vikash","M",  5000,  42,  "PFLl",  "Bangalore");
-		Employee e2 = new Employee( 2,  "kailash","M" , 4000,  38,  "AUTH",  "Noida");
-		Employee e3 = new Employee( 3,  "Prakash", "M" , 3000,  32,  "BUSI",  "Jainamore");
-		Employee e4 = new Employee( 4,  "Subhash", "M" , 6000,  33,  "PISP",  "Pune");
-		Employee e5 = new Employee( 5,  "Meera", "F" , 8000,  45,  "PISP",  "Delhi");
-		
-		emplist.add(e1);
-		emplist.add(e2);
-		emplist.add(e3);
-		emplist.add(e4);
-		emplist.add(e5);
-		return emplist;
-		
-	}
-
-	public static void printList(List<Employee> employeelist) {
-		employeelist.stream().forEach(System.out::println);
-	}
 }

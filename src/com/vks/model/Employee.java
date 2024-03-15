@@ -3,6 +3,9 @@
  */
 package com.vks.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Vikash
  *
@@ -75,6 +78,28 @@ public class Employee {
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+	
+	
+	public static List<Employee> getEmployeeList(){
+		List<Employee>  emplist = new ArrayList<>();
+		Employee e1 = new Employee( 1,  "vikash","M",  5000,  42,  "PFLl",  "Bangalore");
+		Employee e2 = new Employee( 2,  "kailash","M" , 4000,  38,  "AUTH",  "Noida");
+		Employee e3 = new Employee( 3,  "Subhash", "M" , 3000,  32,  "BUSI",  "Jainamore");
+		Employee e4 = new Employee( 4,  "Subhash", "M" , 6000,  33,  "PISP",  "Pune");
+		Employee e5 = new Employee( 5,  "Meera", "F" , 8000,  45,  "PISP",  "Delhi");
+		
+		emplist.add(e1);
+		emplist.add(e2);
+		emplist.add(e3);
+		emplist.add(e4);
+		emplist.add(e5);
+		return emplist;
+		
+	}
+
+	public static void printList(List<Employee> employeelist) {
+		employeelist.stream().forEach(System.out::println);
 	}
 		
 }
