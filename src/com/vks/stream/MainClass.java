@@ -45,6 +45,11 @@ public class MainClass {
 		// Q Find the sum of salary of odd emp id 
 			Integer sumSalary = employeelist.stream().filter(emp -> emp.getEmpId() % 2 != 0).collect( Collectors.summingInt(Employee:: getSalary ));
 			System.out.println("Sum of salary of Odd Employee = "+ sumSalary);
+			
+			// Q Create a map of emp id and its name 
+			Map<Integer, String> empMap = employeelist.stream().collect(Collectors.toMap(Employee::getEmpId, Employee::getName));
+			
+			System.out.println("Employee Map " + empMap);
 	}
 	
 	
